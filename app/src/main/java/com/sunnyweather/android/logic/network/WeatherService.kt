@@ -1,6 +1,5 @@
 package com.sunnyweather.android.logic.network
 
-
 import com.sunnyweather.android.SunnyWeatherApplication
 import com.sunnyweather.android.logic.model.DailyResponse
 import com.sunnyweather.android.logic.model.RealtimeResponse
