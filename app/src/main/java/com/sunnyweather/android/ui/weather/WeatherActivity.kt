@@ -1,6 +1,7 @@
 package com.sunnyweather.android.ui.weather
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -61,9 +62,11 @@ class WeatherActivity : AppCompatActivity() {
         swipeRefresh.setOnRefreshListener {
             refreshWeather()
         }
+
         navBtn.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
+
         drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerStateChanged(newState: Int) {}
 
@@ -121,6 +124,21 @@ class WeatherActivity : AppCompatActivity() {
         ultravioletText.text = lifeIndex.ultraviolet[0].desc
         carWashingText.text = lifeIndex.carWashing[0].desc
         weatherLayout.visibility = View.VISIBLE
+
+        shareBtn.setOnClickListener {
+            var share_intent = Intent()
+            share_intent.action = Intent.ACTION_SEND //设置分享行为
+            share_intent.type = "text/plain" //设置分享内容的类型
+            share_intent.putExtra(Intent.EXTRA_SUBJECT, "share") //添加分享内 oid")
+            share_intent.putExtra(
+                Intent.EXTRA_TEXT, "${viewModel.placeName}的气温是" +
+                        "${realtime.temperature.toInt()} ℃");
+
+
+
+            share_intent = Intent.createChooser(share_intent, "share")
+            startActivity(share_intent)
+        }
     }
 
 }
